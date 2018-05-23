@@ -21,14 +21,23 @@ board = chess.Board()
 def showBoard(request):
 	if request.method == 'POST':
 		if request.POST.get('what') == 'start':
-			if board.turn:
-				eg1.position(board)
-				result = eg1.go(movetime=3000)
+			if board.is_checkmate():
+				return HttpResponse(json.dumps({
+					'board': chess.svg.board(board, size=600),
+					'checkmate': board.is_checkmate()
+				}))
 			else:
-				eg2.position(board)
-				result = eg2.go(movetime=3000)
-			board.push(result[0])
-			return HttpResponse(chess.svg.board(board, size=600))
+				if board.turn:
+					eg1.position(board)
+					result = eg1.go(movetime=3000)
+				else:
+					eg2.position(board)
+					result = eg2.go(movetime=3000)
+				board.push(result[0])
+				return HttpResponse(json.dumps({
+					'board': chess.svg.board(board, size=600),
+					'checkmate': board.is_checkmate()
+				}))
 	else:
 		context = {}
 		context['eg1'] = eg1.name

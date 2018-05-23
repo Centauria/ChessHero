@@ -15,8 +15,11 @@
 
     $('#start').click(function () {
         $.post('start', {what: 'start'}, function (data) {
-            $('svg').replaceWith(data);
-            $('#start').removeAttr('disabled')
+            data = eval('(' + data + ')')
+            $('svg').replaceWith(data['board']);
+            if (!data['checkmate']) {
+                $('#start').removeAttr('disabled')
+            }
         });
         $('#start').attr('disabled', 'true')
     })
