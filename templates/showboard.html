@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Board</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Board</h1>
+<h3>{{ eg1 }} VS {{ eg2 }}</h3>
+{{ board | safe }}
+<p/>
+<input type="button" value="START" id="start">
+<script type="text/javascript">
+
+    $('#start').click(function () {
+        $.post('start', {what: 'start'}, function (data) {
+            $('svg').replaceWith(data);
+            $('#start').removeAttr('disabled')
+        });
+        $('#start').attr('disabled', 'true')
+    })
+</script>
+</body>
+</html>
