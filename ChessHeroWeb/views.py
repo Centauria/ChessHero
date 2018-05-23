@@ -6,9 +6,9 @@ import chess.uci
 import chess.svg
 import json
 
-eg1 = chess.uci.popen_engine("D:\Program Files (x86)\Arena\Engines\Hermann\Hermann28_64.exe",
+eg1 = chess.uci.popen_engine("./Engines/Hermann28_64.exe",
 							 engine_cls=chess.uci.Engine)
-eg2 = chess.uci.popen_engine("D:\Program Files (x86)\Arena\Engines\Stockfish\stockfish_8_x64.exe",
+eg2 = chess.uci.popen_engine("./Engines/stockfish_8_x64.exe",
 							 engine_cls=chess.uci.Engine)
 eg1.uci()
 eg2.uci()
